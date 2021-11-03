@@ -1,0 +1,20 @@
+/*
+ * TIMER_Cnfg.h
+ *
+ *  Created on: Oct 29, 2021
+ *      Author: Shaban
+ */
+
+#ifndef TIMER_CNFG_H_
+#define TIMER_CNFG_H_
+
+
+typedef struct
+{
+	u8  TIMER_u8Mode ;
+
+
+}TIMER_t;
+
+
+#endif /* TIMER_CNFG_H_ */

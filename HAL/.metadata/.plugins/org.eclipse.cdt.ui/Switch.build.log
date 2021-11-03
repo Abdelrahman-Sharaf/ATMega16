@@ -1,0 +1,7 @@
+17:31:09 **** Clean-only build of configuration Debug for project Switch ****
+make clean 
+rm -rf  Switch.hex  ./MCAL/DIO/DIO_prog.o  ./MCAL/.metadata/.plugins/org.eclipse.cdt.make.core/specs.o  ./Swirch_prog.o ./Switch_config.o ./main.o  sizedummy  Switch.lss  ./MCAL/DIO/DIO_prog.d  ./MCAL/.metadata/.plugins/org.eclipse.cdt.make.core/specs.d  ./Swirch_prog.d ./Switch_config.d ./main.d  Switch.elf
+ 
+
+17:31:10 Build Finished. 0 errors, 0 warnings. (took 753ms)
+

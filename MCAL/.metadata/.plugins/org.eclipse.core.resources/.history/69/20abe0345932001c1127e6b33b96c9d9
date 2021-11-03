@@ -1,0 +1,47 @@
+/*
+ * main.c
+ *
+ *  Created on: Oct 13, 2021
+ *      Author: Shaban
+ */
+/****************************************************************************/
+/******************************  INCLUDES  **********************************/
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
+
+#include "E:\NTI\AVR\ATmeg16_Drivers\MCAL\interrupt.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\MCAL\DIO\DIO_interface.h"
+
+#include "ADC_Cnfg.h"
+#include "ADC_interface.h"
+
+
+int main(void)
+{
+
+	ADC_enuInit();
+
+	ADC_enuSelectChannel(ADC_CHANNEL_6);
+
+	while(1)
+	{
+
+
+	}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

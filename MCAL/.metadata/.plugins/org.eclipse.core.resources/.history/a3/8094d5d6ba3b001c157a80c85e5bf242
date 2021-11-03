@@ -1,0 +1,159 @@
+/*
+ * Robot.c
+ *
+ *  Created on: Oct 25, 20211
+ *      Author: Shaban
+ */
+
+#include "STD_TYPES.h"
+#include "errorStates.h"
+
+#include "Robot.h"
+#include "Robot_Priv.h"
+
+#include<stdio.h>
+
+
+static volatile State_t* Golble_pstrCurrentState = NULL ;
+
+
+u8 Robot_u8Dir[100]={NONE};
+
+u8 Robot_u8Area[ROW_MAX][COL_MAX]=
+{
+		/***************************************************/
+		/*******************  Search Space  ****************/
+
+		          /*  C0 , C1 , C2 , C3 , C4 , C5 , C6 ,C7 , C8 , C9 , C10 ,C11 ,C12,C13 ,C14 ,C15 ,C16 ,C17 ,C18, C19 ,C20*/
+
+		/* R0 */	{ 11 , 00 , 00 , 11 , 11 , 11 , 11, 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 },
+		/* R1 */	{ 11 , 00 , 00 , 11 , 00 , 00 , 00, 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 },
+		/* R2 */	{ 00 , 00 , 00 , 11 , 00 , 00 , 00, 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 },
+		/* R3 */	{ 00 , 11 , 00 , 11 , 00 , 00 , 00, 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 },
+		/* R4 */	{ 00 , 11 , 00 , 11 , 00 , 00 , 11, 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 },
+		/* R5 */	{ 00 , 11 , 00 , 00 , 00 , 11 , 11, 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 },
+		/* R6 */	{ 00 , 11 , 11 , 00 , 00 , 00 , 00, 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 },
+        /* R7 */    { 00 , 11 , 00 , 11 , 00 , 00 , 11, 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 },
+        /* R8 */    { 00 , 11 , 00 , 00 , 00 , 11 , 11, 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 , 00 },
+        /* R9 */    { 00 , 11 , 11 , 00 , 00 , 00 , 00, 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 , 11 , 00 }
+
+
+
+
+
+};
+
+
+void INITIAL_STATE( State_t* Cpy_pstrCurrentState )
+{
+	Golble_pstrCurrentState = Cpy_pstrCurrentState ;
+}
+
+
+/* This function returns the available actions.         */
+void ACTIONS( AvailableActions_t* Cpy_pstrAvailableAcions)
+{
+	if( Golble_pstrCurrentState != NULL )
+	{
+
+		u8 Local_u8CurrenCol = Golble_pstrCurrentState->Col;
+		u8 Local_u8CurrenRow = Golble_pstrCurrentState->Row;
+
+		if( (Local_u8CurrenCol <=  COL_MAX)&&( Local_u8CurrenRow <=  ROW_MAX )  )
+		{
+		// I can go to right.
+		if( (Local_u8CurrenCol < COL_MAX-1) &&
+				( Robot_u8Area[Local_u8CurrenRow][Local_u8CurrenCol+1]) != 11 )
+		{
+
+			Cpy_pstrAvailableAcions->right = true ;
+
+		}
+		else
+		{
+			Cpy_pstrAvailableAcions->right = false ;
+		}
+
+		// I can go to down.
+		if( (Local_u8CurrenRow < ROW_MAX-1) &&
+				( Robot_u8Area[Local_u8CurrenRow+1][Local_u8CurrenCol]) != 11 )
+		{
+
+			Cpy_pstrAvailableAcions->down = true ;
+
+		}
+		else
+		{
+			Cpy_pstrAvailableAcions->down = false ;
+		}
+
+
+		// I can go to left.
+		if( (Local_u8CurrenCol > COL_MIN ) &&
+				( Robot_u8Area[Local_u8CurrenRow][Local_u8CurrenCol-1]) != 11 )
+		{
+
+			Cpy_pstrAvailableAcions->left = true ;
+
+		}
+		else
+		{
+			Cpy_pstrAvailableAcions->left = false ;
+		}
+
+		// I can go to up.
+		if( (Local_u8CurrenRow > ROW_MIN ) &&
+				( Robot_u8Area[Local_u8CurrenRow-1][Local_u8CurrenCol]) != 11 )
+		{
+
+			Cpy_pstrAvailableAcions->up = true ;
+
+		}
+		else
+		{
+			Cpy_pstrAvailableAcions->up = false ;
+		}
+
+
+	}
+	else
+	{
+		printf("Not valid Choice!.\n");
+	}
+	}
+	else
+	{
+		printf("NULL Pointer is passed!.\n");
+	}
+
+}/* End of ACTIONS(). */
+
+State_t RESULT( State_t* Cpy_strCurrentState  , AvailableActions_t* Cpy_enuAction )
+{
+	if( (Cpy_strCurrentState != NULL) && (Cpy_enuAction != NULL) )
+	{
+
+	}
+	else
+	{
+		//Null Pointer is Passed.
+	}
+
+}/* End of RESULT(). */
+
+
+
+bool_t GOAL_TEST( State_t Cpy_strCurrentState )
+{
+
+}/* End of GOAL_TEST(). */
+
+//u8 STEP_COST( State_t Cpy_strCurrentState  ,  ActionSet_t Cpy_enuAction  );
+
+
+
+
+
+
+
+

@@ -1,0 +1,175 @@
+/*
+ * EXTI_prog.c
+ *
+ *  Created on: Oct 8, 2021
+ *      Author: Shaban
+ */
+
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
+
+#include "EXTI_priv.h"
+#include "EXTI_Cnfg.h"
+
+/**********************************************************************/
+/**********************************************************************/
+/**********************************************************************/
+/**********************************************************************/
+/**********************************************************************/
+ES_t   EXTI_enuInit( EXTI_t*  Cpy_pstrEXTICnfg )
+{
+	ES_t Local_enuErrorState = ES_NOK ;
+
+
+	if( Cpy_pstrEXTICnfg != NULL )
+	{
+		u8 Local_u8Iterator = 0;
+
+		for( Local_u8Iterator = 0 ; Local_u8Iterator < EXTI_NUM ; Local_u8Iterator++ )
+		{
+			if( Cpy_pstrEXTICnfg[Local_u8Iterator].EXTI_u8State == EXTI_ACTIVE )
+			{
+				// Enable the appropriate interrupt in each iteration.
+				switch(Local_u8Iterator)
+				{
+				case 0 :
+
+					/*********************************************************
+					 * Appropriate Sence Level Handling.                     *
+					 *********************************************************/
+					MCUCR  &= ~( (EXTI_MASK_BIT<<ISC00) | (EXTI_MASK_BIT<<ISC01) );
+
+					switch(Cpy_pstrEXTICnfg[Local_u8Iterator].EXTI_u8SenceLevel)
+					{
+					case EXTI_RISING_EDGE :
+						MCUCR   |= (EXTI_MASK_BIT<<ISC00 )|(EXTI_MASK_BIT<<ISC01 );
+						break;
+
+					case EXTI_FALLING_EDGE :
+						MCUCR   |=  (EXTI_MASK_BIT<<ISC01 );
+						break;
+
+					case  EXTI_LOGIC_CHANGE:
+						MCUCR   |=  (EXTI_MASK_BIT<<ISC00 );
+						break;
+
+					case EXTI_LOW_LEVEL :
+						break;
+
+					default:
+						Local_enuErrorState = ES_OUT_OF_RANGE ;
+
+
+					}
+					//Enable the ENT0.
+					GICR |=(EXTI_MASK_BIT<<INT0);
+					break;
+
+					case 1 :
+
+						MCUCR  &= ~( (EXTI_MASK_BIT<<ISC10) | (EXTI_MASK_BIT<<ISC11) );
+
+						switch(Cpy_pstrEXTICnfg[Local_u8Iterator].EXTI_u8SenceLevel)
+						{
+						case EXTI_RISING_EDGE :
+							MCUCR   |= (EXTI_MASK_BIT<<ISC10 )|(EXTI_MASK_BIT<<ISC11 );
+							break;
+
+						case EXTI_FALLING_EDGE :
+							MCUCR   |=  (EXTI_MASK_BIT<<ISC11 );
+							break;
+
+						case  EXTI_LOGIC_CHANGE:
+							MCUCR   |=  (EXTI_MASK_BIT<<ISC10 );
+							break;
+
+						case EXTI_LOW_LEVEL :
+							break;
+
+						default:
+							Local_enuErrorState = ES_OUT_OF_RANGE ;
+
+							GICR |=(EXTI_MASK_BIT<<INT1);
+							break;
+
+						case 2 :
+							MCUCSR  &= ~(EXTI_MASK_BIT<<ISC2) ;
+
+							switch(Cpy_pstrEXTICnfg[Local_u8Iterator].EXTI_u8SenceLevel)
+							{
+							case EXTI_RISING_EDGE :
+								MCUCSR   |= (EXTI_MASK_BIT<<ISC2 );
+								break;
+
+							case EXTI_FALLING_EDGE :
+								break;
+
+
+							default:
+								Local_enuErrorState = ES_OUT_OF_RANGE ;
+
+								GICR |=(EXTI_MASK_BIT<<INT2);
+								break;
+
+							}
+
+
+						}
+						else if()
+						{
+
+						}
+						else
+						{
+
+						}
+
+
+				}//End of for loop.
+
+			}
+			else
+			{
+				Local_enuErrorState = ES_NULL_POINTER ;
+			}
+
+
+			return Local_enuErrorState;
+		}
+
+
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		ES_t   EXTI_enuSetSenceMode( EXTI_t*  Cpy_pstrEXTI_ID  , u8 Cpy_u8SenceLevel )
+		{
+			ES_t Local_enuErrorState = ES_NOK ;
+
+			return Local_enuErrorState;
+		}
+
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		ES_t   EXTI_enuEnableINT( EXTI_t*  Cpy_pstrEXTI_ID  )
+		{
+			ES_t Local_enuErrorState = ES_NOK ;
+
+			return Local_enuErrorState;
+		}
+
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		/**********************************************************************/
+		ES_t   EXTI_enuDisableINT( EXTI_t*  Cpy_pstrEXTI_ID  )
+		{
+			ES_t Local_enuErrorState = ES_NOK ;
+
+			return Local_enuErrorState;
+		}

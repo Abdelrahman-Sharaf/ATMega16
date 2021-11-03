@@ -1,0 +1,28 @@
+/*
+ * TIMER_Priv.h
+ *
+ *  Created on: Oct 29, 2021
+ *      Author: Shaban
+ */
+
+#ifndef TIMER_PRIV_H_
+#define TIMER_PRIV_H_
+
+
+
+#define TCCR2   (*((volatile u8* const)0x45))
+
+
+// Define TCCR2 Bits
+#define    FOC2           7
+#define    WGM20          6
+#define    COM21          5
+#define    COM20          4
+#define    WGM21          3
+#define    CS22           2
+#define    CS21           1
+#define    CS20           0
+
+
+
+#endif /* TIMER_PRIV_H_ */

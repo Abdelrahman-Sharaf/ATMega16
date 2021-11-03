@@ -1,0 +1,15 @@
+/*
+ * TIMER_Prog.c
+ *
+ *  Created on: Oct 29, 2021
+ *      Author: Shaban
+ */
+
+/****************************************************************************/
+/******************************  INCLUDES  **********************************/
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
+
+
+#include "TIMER_Priv.h"
+#include "TIMER_Cnfg.h"

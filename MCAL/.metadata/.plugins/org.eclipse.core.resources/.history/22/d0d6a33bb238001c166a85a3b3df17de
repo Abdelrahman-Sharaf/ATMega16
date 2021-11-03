@@ -1,0 +1,31 @@
+/*
+ * main.c
+ *
+ *  Created on: Oct 29, 2021
+ *      Author: Shaban
+ */
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\BIT_MATH.h"
+
+#include "TIMER_Priv.h"
+#include "TIMER_Cnfg.h"
+#include "TIMER_interface.h"
+
+#include<util/delay.h>
+
+int main(void)
+{
+
+
+	while(1)
+	{
+		_delay_ms(1000);
+		SET_REG(TCCR0) ;
+		_delay_ms(1000);
+		CLR_REG(TCCR0) ;
+
+	}
+}
+
+

@@ -1,0 +1,58 @@
+/*
+ * main.c
+ *
+ *  Created on: Oct 13, 2021
+ *      Author: Shaban
+ */
+/****************************************************************************/
+/******************************  INCLUDES  **********************************/
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
+
+#include "E:\NTI\AVR\ATmeg16_Drivers\MCAL\interrupt.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\MCAL\DIO\DIO_interface.h"
+
+#include "ADC_Cnfg.h"
+#include "ADC_interface.h"
+
+#include <util\delay.h>
+int main(void)
+{
+	u16 ADC_Read = 0 ;
+
+	DIO_enuSetPortDirection( DIO_PORTC , DIO_OUTPUT_PORT );
+	DIO_enuSetPortValue(DIO_PORTC , 0xFF);
+
+	DIO_enuSetPinDirection(DIO_PORTA ,DIO_INPTU_PIN; DIO_PIN0 );
+
+	ADC_enuInit();
+	ADC_enuSelectChannel( ADC_CHANNEL_0);
+	ADC_enuEnable();
+
+    DIO_enuSetPortValue(DIO_PORTC ,0x00 );
+	_delay_ms(3000);
+
+	while(1)
+	{
+		ADC_enuStartConversion();
+		ADC_enuPollingSys();
+		ADC_enuRead(&ADC_Read );
+		DIO_enuSetPortValue(DIO_PORTC ,(u8)ADC_Read );
+	}
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

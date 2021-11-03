@@ -1,0 +1,12 @@
+/*
+ * EXTI_interface.h
+ *
+ *  Created on: Oct 8, 2021
+ *      Author: Shaban
+ */
+
+
+ES_t   EXTI_enuInit( EXTI_t*  Cpy_pstrEXTICnfg );
+ES_t   EXTI_enuSetSenceMode( u8 Cpy_u8EXTI_ID  , u8 Cpy_u8SenceLevel );
+ES_t   EXTI_enuEnableINT(    u8 Cpy_u8EXTI_ID  );
+ES_t   EXTI_enuDisableINT(   u8 Cpy_u8EXTI_ID  );

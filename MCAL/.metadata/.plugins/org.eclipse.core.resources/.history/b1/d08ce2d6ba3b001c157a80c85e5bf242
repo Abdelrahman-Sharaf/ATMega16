@@ -1,0 +1,55 @@
+/*
+ * main.c
+ *
+ *  Created on: Oct 25, 2021
+ *      Author: Shaban
+ */
+
+
+#include<stdio.h>
+#include "STD_TYPES.h"
+
+#include"Robot.h"
+
+
+
+
+State_t Suorce ={    .Row = 5 , .Col = 7 };
+
+State_t Distination={.Row = 5 , .Col = 5 };
+
+State_t Current ;
+
+
+AvailableActions_t MyAvailableAcions ;
+
+int main(void)
+{
+
+	INITIAL_STATE( &Suorce );
+	ACTIONS(&MyAvailableAcions);
+
+	if(MyAvailableAcions.down == true  )
+	{
+		printf("Down\n");
+
+	}
+	if(MyAvailableAcions.up == true  )
+	{
+		printf("Up\n");
+
+	}
+	if(MyAvailableAcions.right == true  )
+	{
+		printf("Right\n");
+	}
+
+	if(MyAvailableAcions.left == true  )
+	{
+		printf("Left\n");
+	}
+
+
+   RESULT( &Current , &MyAvailableAcions);
+
+}

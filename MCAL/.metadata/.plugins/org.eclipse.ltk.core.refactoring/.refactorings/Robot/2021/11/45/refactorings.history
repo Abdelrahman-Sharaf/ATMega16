@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Robot/DLL/DLL.c&apos; to &apos;DLL_prog.c&apos;" description="Rename resource &apos;DLL.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="DLL/DLL.c" name="DLL_prog.c" stamp="1635859481854" updateReferences="true"/>
+</session>

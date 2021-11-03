@@ -1,0 +1,29 @@
+/*
+ * DLL_Priv.h
+ *
+ *  Created on: Nov 2, 2021
+ *      Author: Shaban
+ */
+
+#ifndef DLL_DLL_PRIV_H_
+#define DLL_DLL_PRIV_H_
+
+// Define the list element.
+typedef struct node
+{
+
+	u8                data      ;
+	u8                cost      ;
+
+	struct node*      parent[5] ;
+	struct node*      child[5]  ;
+
+}DLLNode_t;
+
+
+
+
+
+
+
+#endif /* DLL_DLL_PRIV_H_ */

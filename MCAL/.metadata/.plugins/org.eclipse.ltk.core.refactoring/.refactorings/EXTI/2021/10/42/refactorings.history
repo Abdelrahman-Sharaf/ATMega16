@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;Swirch_prog.c, Switch_config.c, Switch_config.h, Switch_interface.h, Switch_priv.h&apos; to &apos;Switch&apos;" description="Move 5 resources to &apos;Switch&apos;" destination="HAL/Switch" element1="HAL/Swirch_prog.c" element2="HAL/Switch_config.c" element3="HAL/Switch_config.h" element4="HAL/Switch_interface.h" element5="HAL/Switch_priv.h" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="5" stamp="1633924122335" updateReferences="true"/>
+</session>

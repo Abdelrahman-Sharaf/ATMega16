@@ -1,0 +1,16 @@
+/*
+ * TIMER_Cnfg.c
+ *
+ *  Created on: Oct 29, 2021
+ *      Author: Shaban
+ */
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
+
+#include "TIMER_Priv.h"
+#include "TIMER_Cnfg.h"
+
+TIMER_t TIMRE_AstrCnfg[TIMER_NUM]=
+{
+
+};

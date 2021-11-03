@@ -1,0 +1,51 @@
+/*
+ * main.c
+ *
+ *  Created on: Oct 9, 2021
+ *      Author: Shaban
+ */
+
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
+
+#include "E:\NTI\AVR\ATmeg16_Drivers\MCAL\DIO\DIO_interface.h"
+
+#include "E:\NTI\AVR\ATmeg16_Drivers\HAL\Switch\Switch_config.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\HAL\Switch\Switch_interface.h"
+
+#include "E:\NTI\AVR\ATmeg16_Drivers\HAL\Led\Led_interface.h"
+
+#include "EXTI_Cnfg.h"
+#include "EXTI_interface.h"
+
+#include<util/delay.h>
+
+#define SREG   *((u8*)0x5F)
+
+int main(void)
+{
+
+	EXTI_enuInit( EXTI_AstrCnfg );
+	Switch_enuInit(Switch_AstrSwitchState);
+	LED_enuInit( LED_AstrLedConfi );
+
+
+	//Led.
+	DIO_enuSetPinDirection(DIO_PORTD,  DIO_PIN1,   DIO_OUTPUT_PIN);
+	DIO_enuSetPinValue(DIO_PORTD,  DIO_PIN1,  DIO_LOW );
+
+
+
+	SREG |=(1<<7);
+
+	while(1)
+	{
+		//EXTI_enuSetSenceMode( EXTI_0  ,  LOW_LEVEL);
+	}
+}
+
+
+void tog(void)
+{
+
+}

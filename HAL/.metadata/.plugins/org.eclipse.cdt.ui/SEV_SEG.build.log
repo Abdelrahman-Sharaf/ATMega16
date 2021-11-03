@@ -1,0 +1,20 @@
+23:25:01 **** Incremental Build of configuration Debug for project SEV_SEG ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega16 SEV_SEG.elf
+AVR Memory Usage
+----------------
+Device: atmega16
+
+Program:   11378 bytes (69.4% Full)
+(.text + .data + .bootloader)
+
+Data:         38 bytes (3.7% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+23:25:01 Build Finished. 0 errors, 0 warnings. (took 352ms)
+

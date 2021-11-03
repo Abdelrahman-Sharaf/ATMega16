@@ -1,0 +1,14 @@
+22:23:59 **** Incremental Build of configuration Debug for project LCD ****
+make all 
+Building file: ../LCD_prog.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"LCD_prog.d" -MT"LCD_prog.o" -c -o "LCD_prog.o" "../LCD_prog.c"
+In file included from ../LCD_prog.c:19:
+c:/winavr-20100110/lib/gcc/../../avr/include/util\delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../LCD_prog.c: In function 'LCD_enuInit':
+../LCD_prog.c:138: error: cannot convert to a pointer type
+make: *** [LCD_prog.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+
+22:23:59 Build Failed. 2 errors, 1 warnings. (took 536ms)
+

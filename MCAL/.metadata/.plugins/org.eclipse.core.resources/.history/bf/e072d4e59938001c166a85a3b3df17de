@@ -1,0 +1,17 @@
+/*
+ * TIMER_Cnfg.h
+ *
+ *  Created on: Oct 29, 2021
+ *      Author: Shaban
+ */
+
+#ifndef TIMER_CNFG_H_
+#define TIMER_CNFG_H_
+
+#define TIMER_PRES
+
+#define TIMER_MODE
+
+#define OC_MODE       DIS
+
+#endif /* TIMER_CNFG_H_ */

@@ -1,0 +1,404 @@
+09:10:20 **** Clean-only build of configuration Release for project Robot ****
+rm -rf Robot.o main.d Robot.exe main.o Robot.d 
+09:10:25 **** Rebuild of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:134:1: warning: control reaches end of non-void function [-Wreturn-type]
+  134 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:141:1: warning: control reaches end of non-void function [-Wreturn-type]
+  141 | }/* End of GOAL_TEST(). */
+      | ^
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+..\main.c: In function 'main':
+..\main.c:53:12: error: incompatible type for argument 1 of 'RESULT'
+   53 |    RESULT( &Current , &MyAvailableAcions);
+      |            ^~~~~~~~
+      |            |
+      |            State_t * {aka struct <anonymous> *}
+In file included from ..\main.c:12:
+..\Robot.h:70:25: note: expected 'State_t' {aka 'struct <anonymous>'} but argument is of type 'State_t *' {aka 'struct <anonymous> *'}
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , ActionSet_t Cpy_enuAction );
+      |                 ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+..\main.c:53:23: error: incompatible type for argument 2 of 'RESULT'
+   53 |    RESULT( &Current , &MyAvailableAcions);
+      |                       ^~~~~~~~~~~~~~~~~~
+      |                       |
+      |                       AvailableActions_t * {aka struct <anonymous> *}
+In file included from ..\main.c:12:
+..\Robot.h:70:60: note: expected 'ActionSet_t' {aka 'enum <anonymous>'} but argument is of type 'AvailableActions_t *' {aka 'struct <anonymous> *'}
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , ActionSet_t Cpy_enuAction );
+      |                                                ~~~~~~~~~~~~^~~~~~~~~~~~~
+09:13:21 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c:131:9: error: conflicting types for 'RESULT'
+  131 | State_t RESULT( State_t Cpy_strCurrentState  , ActionSet_t Cpy_enuAction )
+      |         ^~~~~~
+In file included from ..\Robot.c:11:
+..\Robot.h:70:9: note: previous declaration of 'RESULT' was here
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , AvailableActions_t Cpy_enuAction );
+      |         ^~~~~~
+..\Robot.c: In function 'RESULT':
+..\Robot.c:134:1: warning: control reaches end of non-void function [-Wreturn-type]
+  134 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:141:1: warning: control reaches end of non-void function [-Wreturn-type]
+  141 | }/* End of GOAL_TEST(). */
+      | ^
+09:15:41 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+..\main.c: In function 'main':
+..\main.c:53:12: error: incompatible type for argument 1 of 'RESULT'
+   53 |    RESULT( &Current , &MyAvailableAcions);
+      |            ^~~~~~~~
+      |            |
+      |            State_t * {aka struct <anonymous> *}
+In file included from ..\main.c:12:
+..\Robot.h:70:25: note: expected 'State_t' {aka 'struct <anonymous>'} but argument is of type 'State_t *' {aka 'struct <anonymous> *'}
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , AvailableActions_t Cpy_enuAction );
+      |                 ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+..\main.c:53:23: error: incompatible type for argument 2 of 'RESULT'
+   53 |    RESULT( &Current , &MyAvailableAcions);
+      |                       ^~~~~~~~~~~~~~~~~~
+      |                       |
+      |                       AvailableActions_t * {aka struct <anonymous> *}
+In file included from ..\main.c:12:
+..\Robot.h:70:67: note: expected 'AvailableActions_t' {aka 'struct <anonymous>'} but argument is of type 'AvailableActions_t *' {aka 'struct <anonymous> *'}
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , AvailableActions_t Cpy_enuAction );
+      |                                                ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+09:16:51 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:134:1: warning: control reaches end of non-void function [-Wreturn-type]
+  134 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:141:1: warning: control reaches end of non-void function [-Wreturn-type]
+  141 | }/* End of GOAL_TEST(). */
+      | ^
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+..\main.c: In function 'main':
+..\main.c:53:12: error: incompatible type for argument 1 of 'RESULT'
+   53 |    RESULT( &Current , &MyAvailableAcions);
+      |            ^~~~~~~~
+      |            |
+      |            State_t * {aka struct <anonymous> *}
+In file included from ..\main.c:12:
+..\Robot.h:70:25: note: expected 'State_t' {aka 'struct <anonymous>'} but argument is of type 'State_t *' {aka 'struct <anonymous> *'}
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , AvailableActions_t Cpy_enuAction );
+      |                 ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+..\main.c:53:23: error: incompatible type for argument 2 of 'RESULT'
+   53 |    RESULT( &Current , &MyAvailableAcions);
+      |                       ^~~~~~~~~~~~~~~~~~
+      |                       |
+      |                       AvailableActions_t * {aka struct <anonymous> *}
+In file included from ..\main.c:12:
+..\Robot.h:70:67: note: expected 'AvailableActions_t' {aka 'struct <anonymous>'} but argument is of type 'AvailableActions_t *' {aka 'struct <anonymous> *'}
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , AvailableActions_t Cpy_enuAction );
+      |                                                ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+09:17:21 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o Robot.exe Robot.o main.o 
+09:27:17 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:133:27: error: invalid operands to binary != (have 'State_t' {aka 'struct <anonymous>'} and 'void *')
+  133 |  if( (Cpy_strCurrentState != NULL) && (Cpy_enuAction != NULL) )
+      |                           ^~
+..\Robot.c:133:54: error: invalid operands to binary != (have 'AvailableActions_t' {aka 'struct <anonymous>'} and 'void *')
+  133 |  if( (Cpy_strCurrentState != NULL) && (Cpy_enuAction != NULL) )
+      |                                                      ^~
+..\Robot.c:142:1: warning: control reaches end of non-void function [-Wreturn-type]
+  142 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:149:1: warning: control reaches end of non-void function [-Wreturn-type]
+  149 | }/* End of GOAL_TEST(). */
+      | ^
+10:53:41 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+..\main.c: In function 'main':
+..\main.c:53:12: error: incompatible type for argument 1 of 'RESULT'
+   53 |    RESULT( &Current , &MyAvailableAcions);
+      |            ^~~~~~~~
+      |            |
+      |            State_t * {aka struct <anonymous> *}
+In file included from ..\main.c:12:
+..\Robot.h:70:25: note: expected 'State_t' {aka 'struct <anonymous>'} but argument is of type 'State_t *' {aka 'struct <anonymous> *'}
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , AvailableActions_t Cpy_enuAction );
+      |                 ~~~~~~~~^~~~~~~~~~~~~~~~~~~
+..\main.c:53:23: error: incompatible type for argument 2 of 'RESULT'
+   53 |    RESULT( &Current , &MyAvailableAcions);
+      |                       ^~~~~~~~~~~~~~~~~~
+      |                       |
+      |                       AvailableActions_t * {aka struct <anonymous> *}
+In file included from ..\main.c:12:
+..\Robot.h:70:67: note: expected 'AvailableActions_t' {aka 'struct <anonymous>'} but argument is of type 'AvailableActions_t *' {aka 'struct <anonymous> *'}
+   70 | State_t RESULT( State_t Cpy_strCurrentState  , AvailableActions_t Cpy_enuAction );
+      |                                                ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~
+10:54:16 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c:131:9: error: conflicting types for 'RESULT'
+  131 | State_t RESULT( State_t Cpy_strCurrentState  , AvailableActions_t Cpy_enuAction )
+      |         ^~~~~~
+In file included from ..\Robot.c:11:
+..\Robot.h:70:9: note: previous declaration of 'RESULT' was here
+   70 | State_t RESULT( State_t* Cpy_strCurrentState  , AvailableActions_t* Cpy_enuAction );
+      |         ^~~~~~
+..\Robot.c: In function 'RESULT':
+..\Robot.c:133:27: error: invalid operands to binary != (have 'State_t' {aka 'struct <anonymous>'} and 'void *')
+  133 |  if( (Cpy_strCurrentState != NULL) && (Cpy_enuAction != NULL) )
+      |                           ^~
+..\Robot.c:133:54: error: invalid operands to binary != (have 'AvailableActions_t' {aka 'struct <anonymous>'} and 'void *')
+  133 |  if( (Cpy_strCurrentState != NULL) && (Cpy_enuAction != NULL) )
+      |                                                      ^~
+..\Robot.c:142:1: warning: control reaches end of non-void function [-Wreturn-type]
+  142 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:149:1: warning: control reaches end of non-void function [-Wreturn-type]
+  149 | }/* End of GOAL_TEST(). */
+      | ^
+10:54:41 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:142:1: warning: control reaches end of non-void function [-Wreturn-type]
+  142 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:149:1: warning: control reaches end of non-void function [-Wreturn-type]
+  149 | }/* End of GOAL_TEST(). */
+      | ^
+gcc -o Robot.exe Robot.o main.o 
+10:57:03 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:144:1: warning: control reaches end of non-void function [-Wreturn-type]
+  144 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:151:1: warning: control reaches end of non-void function [-Wreturn-type]
+  151 | }/* End of GOAL_TEST(). */
+      | ^
+gcc -o Robot.exe Robot.o main.o 
+10:58:26 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o Robot.exe Robot.o main.o 
+Info: Nothing to build for Robot
+11:30:47 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o Robot.exe Robot.o main.o 
+Info: Nothing to build for Robot
+Info: Nothing to build for Robot
+11:32:01 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o Robot.exe Robot.o main.o 
+Info: Nothing to build for Robot
+Info: Nothing to build for Robot
+11:41:19 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:149:1: warning: control reaches end of non-void function [-Wreturn-type]
+  149 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:156:1: warning: control reaches end of non-void function [-Wreturn-type]
+  156 | }/* End of GOAL_TEST(). */
+      | ^
+gcc -o Robot.exe Robot.o main.o 
+c:/users/shaban/gcc/bin/../lib/gcc/x86_64-w64-mingw32/9.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: cannot open output file Robot.exe: Permission denied
+collect2.exe: error: ld returned 1 exit status
+15:18:48 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:140:1: warning: control reaches end of non-void function [-Wreturn-type]
+  140 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:147:1: warning: control reaches end of non-void function [-Wreturn-type]
+  147 | }/* End of GOAL_TEST(). */
+      | ^
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+gcc -o Robot.exe Robot.o main.o 
+Info: Nothing to build for Robot
+15:30:27 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+In file included from ..\main.c:11:
+E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h:26: warning: "NULL" redefined
+   26 | #define NULL ((void*)0x00)
+      | 
+In file included from ..\main.c:9:
+c:\users\shaban\gcc\x86_64-w64-mingw32\include\stdio.h:76: note: this is the location of the previous definition
+   76 | #define NULL ((void *)0)
+      | 
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:140:1: warning: control reaches end of non-void function [-Wreturn-type]
+  140 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:147:1: warning: control reaches end of non-void function [-Wreturn-type]
+  147 | }/* End of GOAL_TEST(). */
+      | ^
+gcc -O3 -Wall -c -fmessage-length=0 -o "DLL\\DLL_prog.o" "..\\DLL\\DLL_prog.c" 
+gcc -o Robot.exe "DLL\\DLL_prog.o" Robot.o main.o 
+16:15:08 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o "DLL\\DLL_prog.o" "..\\DLL\\DLL_prog.c" 
+..\DLL\DLL_prog.c:13:31: error: unknown type name 'DLLNode_t'
+   13 | ES_t DLL_enuAdd_Node_At_First(DLLNode_t** head ,u8 data , u8 cost ,
+      |                               ^~~~~~~~~
+..\DLL\DLL_prog.c:14:3: error: unknown type name 'DLLNode_t'
+   14 |   DLLNode_t* parent0  , DLLNode_t* parent1, DLLNode_t* parent2,
+      |   ^~~~~~~~~
+..\DLL\DLL_prog.c:14:25: error: unknown type name 'DLLNode_t'
+   14 |   DLLNode_t* parent0  , DLLNode_t* parent1, DLLNode_t* parent2,
+      |                         ^~~~~~~~~
+..\DLL\DLL_prog.c:14:45: error: unknown type name 'DLLNode_t'
+   14 |   DLLNode_t* parent0  , DLLNode_t* parent1, DLLNode_t* parent2,
+      |                                             ^~~~~~~~~
+..\DLL\DLL_prog.c:15:3: error: unknown type name 'DLLNode_t'
+   15 |   DLLNode_t* parent3  , DLLNode_t* parent4)
+      |   ^~~~~~~~~
+..\DLL\DLL_prog.c:15:25: error: unknown type name 'DLLNode_t'
+   15 |   DLLNode_t* parent3  , DLLNode_t* parent4)
+      |                         ^~~~~~~~~
+16:17:28 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+In file included from ..\main.c:11:
+E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h:26: warning: "NULL" redefined
+   26 | #define NULL ((void*)0x00)
+      | 
+In file included from ..\main.c:9:
+c:\users\shaban\gcc\x86_64-w64-mingw32\include\stdio.h:76: note: this is the location of the previous definition
+   76 | #define NULL ((void *)0)
+      | 
+..\main.c: In function 'main':
+..\main.c:31:29: warning: passing argument 1 of 'DLL_enuAdd_Node_At_First' from incompatible pointer type [-Wincompatible-pointer-types]
+   31 |   DLL_enuAdd_Node_At_First( Frontier ,8 , 8,
+      |                             ^~~~~~~~
+      |                             |
+      |                             DLLNode_t * {aka struct node *}
+In file included from ..\main.c:16:
+..\DLL/DLL_Interface.h:24:43: note: expected 'DLLNode_t **' {aka 'struct node **'} but argument is of type 'DLLNode_t *' {aka 'struct node *'}
+   24 | ES_t DLL_enuAdd_Node_At_First(DLLNode_t** head ,u8 data , u8 cost ,
+      |                               ~~~~~~~~~~~~^~~~
+..\main.c:31:3: error: too many arguments to function 'DLL_enuAdd_Node_At_First'
+   31 |   DLL_enuAdd_Node_At_First( Frontier ,8 , 8,
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~
+In file included from ..\main.c:16:
+..\DLL/DLL_Interface.h:24:6: note: declared here
+   24 | ES_t DLL_enuAdd_Node_At_First(DLLNode_t** head ,u8 data , u8 cost ,
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~
+16:17:39 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+In file included from ..\main.c:11:
+E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h:26: warning: "NULL" redefined
+   26 | #define NULL ((void*)0x00)
+      | 
+In file included from ..\main.c:9:
+c:\users\shaban\gcc\x86_64-w64-mingw32\include\stdio.h:76: note: this is the location of the previous definition
+   76 | #define NULL ((void *)0)
+      | 
+..\main.c: In function 'main':
+..\main.c:31:29: warning: passing argument 1 of 'DLL_enuAdd_Node_At_First' from incompatible pointer type [-Wincompatible-pointer-types]
+   31 |   DLL_enuAdd_Node_At_First( Frontier ,8 , 8,
+      |                             ^~~~~~~~
+      |                             |
+      |                             DLLNode_t * {aka struct node *}
+In file included from ..\main.c:16:
+..\DLL/DLL_Interface.h:24:43: note: expected 'DLLNode_t **' {aka 'struct node **'} but argument is of type 'DLLNode_t *' {aka 'struct node *'}
+   24 | ES_t DLL_enuAdd_Node_At_First(DLLNode_t** head ,u8 data , u8 cost ,
+      |                               ~~~~~~~~~~~~^~~~
+..\main.c:31:3: error: too many arguments to function 'DLL_enuAdd_Node_At_First'
+   31 |   DLL_enuAdd_Node_At_First( Frontier ,8 , 8,
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~
+In file included from ..\main.c:16:
+..\DLL/DLL_Interface.h:24:6: note: declared here
+   24 | ES_t DLL_enuAdd_Node_At_First(DLLNode_t** head ,u8 data , u8 cost ,
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~
+16:18:15 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o "DLL\\DLL_prog.o" "..\\DLL\\DLL_prog.c" 
+..\DLL\DLL_prog.c:11:10: fatal error: DLL/DLL_Priv.h: No such file or directory
+   11 | #include "DLL/DLL_Priv.h"
+      |          ^~~~~~~~~~~~~~~~
+compilation terminated.
+16:18:46 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o "DLL\\DLL_prog.o" "..\\DLL\\DLL_prog.c" 
+..\DLL\DLL_prog.c: In function 'DLL_enuAdd_Node_At_First':
+..\DLL\DLL_prog.c:20:2: warning: implicit declaration of function 'printf' [-Wimplicit-function-declaration]
+   20 |  printf("i am working\n");
+      |  ^~~~~~
+..\DLL\DLL_prog.c:20:2: warning: incompatible implicit declaration of built-in function 'printf'
+..\DLL\DLL_prog.c:13:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+   12 | #include "DLL_Interface.h"
+  +++ |+#include <stdio.h>
+   13 | 
+gcc -O3 -Wall -c -fmessage-length=0 -o main.o "..\\main.c" 
+In file included from ..\main.c:11:
+E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h:26: warning: "NULL" redefined
+   26 | #define NULL ((void*)0x00)
+      | 
+In file included from ..\main.c:9:
+c:\users\shaban\gcc\x86_64-w64-mingw32\include\stdio.h:76: note: this is the location of the previous definition
+   76 | #define NULL ((void *)0)
+      | 
+..\main.c: In function 'main':
+..\main.c:31:29: warning: passing argument 1 of 'DLL_enuAdd_Node_At_First' from incompatible pointer type [-Wincompatible-pointer-types]
+   31 |   DLL_enuAdd_Node_At_First( Frontier ,8 , 8,
+      |                             ^~~~~~~~
+      |                             |
+      |                             DLLNode_t * {aka struct node *}
+In file included from ..\main.c:16:
+..\DLL/DLL_Interface.h:24:43: note: expected 'DLLNode_t **' {aka 'struct node **'} but argument is of type 'DLLNode_t *' {aka 'struct node *'}
+   24 | ES_t DLL_enuAdd_Node_At_First(DLLNode_t** head ,u8 data , u8 cost ,
+      |                               ~~~~~~~~~~~~^~~~
+gcc -o Robot.exe "DLL\\DLL_prog.o" Robot.o main.o 
+16:19:29 **** Incremental Build of configuration Release for project Robot ****
+Info: Internal Builder is used for build
+gcc -O3 -Wall -c -fmessage-length=0 -o Robot.o "..\\Robot.c" 
+In file included from ..\Robot.c:9:
+E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h:26: warning: "NULL" redefined
+   26 | #define NULL ((void*)0x00)
+      | 
+In file included from ..\Robot.c:7:
+c:\users\shaban\gcc\x86_64-w64-mingw32\include\stdio.h:76: note: this is the location of the previous definition
+   76 | #define NULL ((void *)0)
+      | 
+..\Robot.c: In function 'RESULT':
+..\Robot.c:141:1: warning: control reaches end of non-void function [-Wreturn-type]
+  141 | }/* End of RESULT(). */
+      | ^
+..\Robot.c: In function 'GOAL_TEST':
+..\Robot.c:148:1: warning: control reaches end of non-void function [-Wreturn-type]
+  148 | }/* End of GOAL_TEST(). */
+      | ^
+gcc -o Robot.exe "DLL\\DLL_prog.o" Robot.o main.o 
+Info: Nothing to build for Robot
+Info: Nothing to build for Robot
+Info: Nothing to build for Robot
+Info: Nothing to build for Robot

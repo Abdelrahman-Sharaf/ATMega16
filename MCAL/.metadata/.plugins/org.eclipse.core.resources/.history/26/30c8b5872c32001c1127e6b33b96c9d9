@@ -1,0 +1,38 @@
+
+
+
+
+
+	/*******************************************************************************/
+	/*ADC Prescaler cases Handling.                                                */
+	/*******************************************************************************/
+	ADCSRA  &=~((ADC_MSK_BIT<<ADPS0)|(ADC_MSK_BIT<<ADPS1)|(ADC_MSK_BIT<<ADPS2));
+
+#if      ADC_PRES   ==    PRES_2
+	//Do nothing.
+
+#elif    ADC_PRES   ==    PRES_4
+	ADCSRA |=(ADC_MSK_BIT<<ADPS1);
+
+#elif    ADC_PRES   ==    PRES_8
+	ADCSRA |=(ADC_MSK_BIT<<ADPS0)|(ADC_MSK_BIT<<ADPS1);
+
+#elif    ADC_PRES   ==    PRES_16
+	ADCSRA |=(ADC_MSK_BIT<<ADPS2);
+
+#elif    ADC_PRES   ==    PRES_32
+	ADCSRA |=(ADC_MSK_BIT<<ADPS0)|(ADC_MSK_BIT<<ADPS2);
+
+#elif    ADC_PRES   ==    PRES_64
+	ADCSRA |=(ADC_MSK_BIT<<ADPS1)|(ADC_MSK_BIT<<ADPS2);
+
+#elif    ADC_PRES   ==    PRES_128
+	ADCSRA |=(ADC_MSK_BIT<<ADPS0)|(ADC_MSK_BIT<<ADPS1)|(ADC_MSK_BIT<<ADPS2);
+
+#else
+
+#error "Not valid ADC_PRES value!!."
+
+#endif
+
+

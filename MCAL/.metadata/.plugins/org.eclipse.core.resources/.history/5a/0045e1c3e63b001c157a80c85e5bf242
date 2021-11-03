@@ -1,0 +1,16 @@
+/*
+ * DLL_Interface.h
+ *
+ *  Created on: Nov 2, 2021
+ *      Author: Shaban
+ */
+
+#ifndef DLL_DLL_INTERFACE_H_
+#define DLL_DLL_INTERFACE_H_
+
+ES_t DLL_enuAdd_Node_At_First(DLLNode_t** head ,u8 data , u8 cost ,
+		DLLNode_t* parent0  , DLLNode_t* parent1, DLLNode_t* parent2,
+		DLLNode_t* parent3  , DLLNode_t* parent4);
+
+
+#endif /* DLL_DLL_INTERFACE_H_ */
