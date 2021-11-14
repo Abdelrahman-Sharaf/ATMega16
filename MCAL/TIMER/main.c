@@ -8,7 +8,6 @@
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\BIT_MATH.h"
 
-#include "TIMER_Priv.h"
 #include "TIMER_Cnfg.h"
 #include "TIMER_interface.h"
 
@@ -17,15 +16,19 @@
 int main(void)
 {
 
+	TIMER_enuInit(TIMRE_AstrCnfg);
+
+	(*((volatile u8*)0x31)) |=(1<<0);
+
+
 
 	while(1)
 	{
-		_delay_ms(1000);
-		(*((u8*)0x53)) = 0XFF;
-		//SET_REG(TCCR2) ;
-		_delay_ms(1000);
-		(*((u8*)0x53)) = 0X00 ;
-		//CLR_REG(TCCR2) ;
+
+		TIMER_enuSetSyncDelay( TIMER0, 1000 );
+
+		(*((volatile u8*)0x32)) ^=(1<<0);
+
 
 	}
 }

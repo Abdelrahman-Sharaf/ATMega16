@@ -10,7 +10,7 @@
 
 
 
-#define  SEG_NUM          1
+#define  SEG_NUM           1
 
 
 
@@ -27,8 +27,8 @@ typedef struct
 	u8 SEG_u8LegC_Port     ;
 	u8 SEG_u8LegC_Pin      ;
 
-	u8 SEG_u8LegD_Port      ;
-	u8 SEG_u8LegD_Pin       ;
+	u8 SEG_u8LegD_Port     ;
+	u8 SEG_u8LegD_Pin      ;
 
 	u8 SEG_u8LegE_Port     ;
 	u8 SEG_u8LegE_Pin      ;

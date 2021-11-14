@@ -1,10 +1,67 @@
+ES_t TIMER_enuSetAsyncDelay( u8 Copy_u8TimerID  ,
+		u32 Copy_u32Time , volatile void (*Copy_pfunApp)(void*) ,
+		volatile void* Copy_pvidParameter )
+{
+
+	ES_t Local_enuErrorState = ES_NOK ;
+
+	if( (Copy_pstrTIMER != NULL) &&  (Copy_pfunApp != NULL) )
+	{
+
+		if( Copy_pstrTIMER == TIMER_ApenuTIMER[TIMER0])
+		{
+			TIMER_pvidAppFunc[TIMER0] = Copy_pfunApp         ;
+			TIMER_pvidAppPara[TIMER0] = Copy_pvidParameter   ;
+
+			f32 Local_f32OVFTime = 256 * ((f32)(Copy_pstrTIMER->TIMER_u8Prescaler)/(Copy_pstrTIMER->TIMER_u16Freq_in_khz));
+
+			f32 Local_u8NumOfOVF = (Copy_u32Time/Local_f32OVFTime);
+
+			if( (Local_u8NumOfOVF - ((u32)Local_u8NumOfOVF) ) != 0.0)
+			{
+				u32 Local_u32IntNumOfOVF =(u32)(Local_u8NumOfOVF+1);
+
+				Local_u8NumOfOVF -= (u32)Local_u8NumOfOVF ;
+
+				u8 Local_u8Preload = 256 - (256*Local_u8NumOfOVF);
+
+				TIMER_u32NumOfOVF[TIMER0]=Local_u32IntNumOfOVF;
+
+				TIMER_u8Preload[TIMER0]  =Local_u8Preload ;
+
+			}
+			else
+			{
+				TIMER_u32NumOfOVF[TIMER0]=(u32)Local_u8NumOfOVF ;
+			}
+
+			TIMSK |=(TIMER_MSK_BIT<<TOIE0);
+
+			Local_enuErrorState = ES_OK ;
+
+		}
+		else if( Copy_pstrTIMER == TIMER_ApenuTIMER[TIMER1])
+		{
+			TIMER_pvidAppFunc[TIMER1] = Copy_pfunApp         ;
+			TIMER_pvidAppPara[TIMER1] = Copy_pvidParameter   ;
+		}
+		else if( Copy_pstrTIMER == TIMER_ApenuTIMER[TIMER2])
+		{
+			TIMER_pvidAppFunc[TIMER2] = Copy_pfunApp         ;
+			TIMER_pvidAppPara[TIMER2] = Copy_pvidParameter   ;
+		}
+		else
+		{
+			//Do Nothing.
+		}
+
+	}
+	else
+	{
+		Local_enuErrorState = ES_NULL_POINTER ;
+	}
 
 
-#define TIMER_PRES    PRES_1024
+	return Local_enuErrorState ;
+}// End of TIME0_enuSetAsyncDelay .
 
-#define TIMER_MODE    OVF
-
-#define OC_MODE       DISCONNECTED
-
-/* Write frequ. in khz*/
-#define TIMER_F_CPU   (1000UL)

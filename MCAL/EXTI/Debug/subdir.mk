@@ -5,18 +5,15 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../EXTI_Cnfg.c \
-../EXTI_prog.c \
-../main.c 
+../EXTI_prog.c 
 
 OBJS += \
 ./EXTI_Cnfg.o \
-./EXTI_prog.o \
-./main.o 
+./EXTI_prog.o 
 
 C_DEPS += \
 ./EXTI_Cnfg.d \
-./EXTI_prog.d \
-./main.d 
+./EXTI_prog.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

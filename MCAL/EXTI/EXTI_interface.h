@@ -9,18 +9,27 @@
 /* Notes                 :   None                                            */
 /*                                                                           */
 /*****************************************************************************/
+/*****************************************************************************/
+/**************************   FILE GUARDE  ***********************************/
+#ifndef EXTI_INTERFACE_H_
+#define EXTI_INTERFACE_H_
+
 
 /****************************************************************************/
 /****************************  PUBLIC MACROS  *******************************/
-#define   EXTI_0                         0
-#define   EXTI_1                         1
-#define   EXTI_2                         2
+#define   EXTI_0                              0
+#define   EXTI_1                              1
+#define   EXTI_2                              2
 
 
-#define   RISING_EDGE                    0
-#define   FALLING_EDGE                   1
-#define   LOGIC_CHANGE                   2
-#define   LOW_LEVEL                      3
+#define   EXTI_DEACTIVE                       0
+#define   EXTI_ACTIVE                         1
+
+
+#define   EXTI_RISING_EDGE                    0
+#define   EXTI_FALLING_EDGE                   1
+#define   EXTI_LOGIC_CHANGE                   2
+#define   EXTI_LOW_LEVEL                      3
 
 
 
@@ -131,5 +140,10 @@ ES_t   EXTI_enuDisableINT( u8 Cpy_u8EXTI_ID  );
 /*.......................********************************************************************************/
 ES_t   EXTI_enuCallBack( void (*Cpy_pfunAppFunc)(void) , void* Cpy_pvidParameter ,  u8 Cpy_u8EXTI_ID  );
 
+
+#endif  //EXTI_INTERFACE_H_
+
+/***************************** END OF FILE. *********************************/
+/****************************************************************************/
 
 

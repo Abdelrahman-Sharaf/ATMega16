@@ -1,4 +1,5 @@
 /*****************************************************************************/
+/*****************************************************************************/
 /* Title                 :   EXTI_prog                                       */
 /* Filename              :   EXTI_prog.c                                     */
 /* Author                :   Shaban Abdullah Awad                            */
@@ -10,8 +11,8 @@
 /*                                                                           */
 /*****************************************************************************/
 
-/****************************************************************************/
-/******************************  INCLUDES  **********************************/
+/*****************************************************************************/
+/******************************  INCLUDES  ***********************************/
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
 
@@ -23,7 +24,7 @@
 
 /**********************************************************************************/
 /* Description     : Tow global arrays of pointers to hold the Addresses of       */
-/*                   the functions and its arguments to use the in the            */
+/*                   the functions and its arguments to use them in the           */
 /*                   CallBack.                                                    */
 /***********************************************************************************/
 static volatile void (*EXTI_ApfunINTFunc[3])(void*)= { NULL , NULL , NULL } ;
@@ -159,7 +160,7 @@ ES_t   EXTI_enuInit( EXTI_t*  Cpy_pstrEXTICnfg )
 			}
 			else
 			{
-
+				//Please Do Nothing.
 			}
 
 		}
@@ -362,7 +363,7 @@ ES_t   EXTI_enuEnableINT( u8 Cpy_u8EXTI_ID  )
 	}
 
 	return Local_enuErrorState;
-}
+}//End of EXTI_enuEnableINT.
 
 
 
@@ -415,7 +416,8 @@ ES_t   EXTI_enuDisableINT(   u8 Cpy_u8EXTI_ID  )
 	}
 
 	return Local_enuErrorState;
-}
+
+}//End of EXTI_enuDisableINT.
 
 
 /********************************************************************************************************/
@@ -470,6 +472,7 @@ ES_t   EXTI_enuCallBack(volatile void (*Cpy_pfunAppFunc)(void*)  , volatile void
 /************* Interrupt service routine for interrupt0 ***************/
 ISR(VECT_INT0)
 {
+
 	if (  EXTI_ApfunINTFunc[EXTI0] != NULL )
 	{
 		(*EXTI_ApfunINTFunc[EXTI0])(EXTI_ApvidGenericParameter[EXTI0]);
@@ -478,7 +481,6 @@ ISR(VECT_INT0)
 	{
 		//Do nothing.
 	}
-
 
 }
 
@@ -494,8 +496,6 @@ ISR(VECT_INT1)
 	{
 		//Do nothing.
 	}
-
-
 
 }
 
@@ -515,3 +515,7 @@ ISR(VECT_INT2)
 	}
 
 }
+
+
+/***************************** END OF FILE. *********************************/
+/****************************************************************************/

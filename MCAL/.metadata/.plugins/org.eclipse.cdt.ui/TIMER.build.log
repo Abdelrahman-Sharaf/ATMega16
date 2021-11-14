@@ -1,11 +1,20 @@
-14:38:11 **** Incremental Build of configuration Debug for project TIMER ****
+20:32:44 **** Incremental Build of configuration Debug for project TIMER ****
 make all 
-Building file: ../main.c
+Building file: ../TIMER_Cnfg.c
 Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
-In file included from ../main.c:15:
-c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
-Finished building: ../main.c
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"TIMER_Cnfg.d" -MT"TIMER_Cnfg.o" -c -o "TIMER_Cnfg.o" "../TIMER_Cnfg.c"
+../TIMER_Cnfg.c:30: warning: excess elements in array initializer
+../TIMER_Cnfg.c:30: warning: (near initialization for 'TIMRE_AstrCnfg')
+../TIMER_Cnfg.c:38: warning: excess elements in array initializer
+../TIMER_Cnfg.c:38: warning: (near initialization for 'TIMRE_AstrCnfg')
+Finished building: ../TIMER_Cnfg.c
+ 
+Building file: ../TIMER_Prog.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"TIMER_Prog.d" -MT"TIMER_Prog.o" -c -o "TIMER_Prog.o" "../TIMER_Prog.c"
+../TIMER_Prog.c: In function '__vector_11':
+../TIMER_Prog.c:414: warning: passing argument 1 of 'TIMER_pvidAppFunc[0]' discards qualifiers from pointer target type
+Finished building: ../TIMER_Prog.c
  
 Building target: TIMER.elf
 Invoking: AVR C Linker
@@ -26,15 +35,15 @@ AVR Memory Usage
 ----------------
 Device: atmega16
 
-Program:    3554 bytes (21.7% Full)
+Program:    5562 bytes (33.9% Full)
 (.text + .data + .bootloader)
 
-Data:         24 bytes (2.3% Full)
+Data:        299 bytes (29.2% Full)
 (.data + .bss + .noinit)
 
 
 Finished building: sizedummy
  
 
-14:38:13 Build Finished. 0 errors, 1 warnings. (took 1s.227ms)
+20:32:55 Build Finished. 0 errors, 5 warnings. (took 10s.787ms)
 

@@ -8,17 +8,19 @@
 #ifndef TIMER_CNFG_H_
 #define TIMER_CNFG_H_
 
+#define TIMER_NUM            1
+#define TIMER_F_CPU_KHZ      (1000UL)
 
 typedef struct
 {
-	u8  TIMER_u8Mode          ;
-	u8  TIMER_u8Prescaler     ;
-	u8  TIMER_u8OCOState      ;
-	u16 TIMER_u16Freq_in_khz  ;
+	u8  TIMER_u8Mode           ;
+	u8  TIMER_u8OC0_State      ;
+	u16  TIMER_u16Prescaler    ;
+	u16 TIMER_u16Freq_in_khz   ;
 
 }TIMER_t;
 
-extern TIMER_t TIMRE_AstrCnfg[TIMER_NUM];
+extern TIMER_t TIMRE_AstrCnfg[];
 
 
 

@@ -1,65 +1,74 @@
-/*
- * DIO_private.h
- *
- *  Created on: Oct 1, 2021
- *      Author: Shaban
- */
+/*****************************************************************************/
+/* Title                 :   DIO_private                                     */
+/* Filename              :   DIO_private.h                                   */
+/* Author                :   Shaban Abdullah Awad                            */
+/* Origin Date           :   Oct 2, 2021                                     */
+/* Version               :   1.0.0                                           */
+/* Compiler              :   mingw GCC                                       */
+/* Target                :   ATmega16 , ATmega32                             */
+/* Notes                 :   None                                            */
+/*****************************************************************************/
 
+/*****************************************************************************/
+/**************************   FILE GUARDE  ***********************************/
 #ifndef DIO_PRIVATE_H_
 #define DIO_PRIVATE_H_
+
+
+
 /****************************************************************************/
-/*PORT ID's.                                                          */
+/*PORT ID's.                                                                */
 /****************************************************************************/
-#define DIO_PORTA    0
-#define DIO_PORTB    1
-#define DIO_PORTC    2
-#define DIO_PORTD    3
+#define DIO_PORTA             0
+#define DIO_PORTB             1
+#define DIO_PORTC             2
+#define DIO_PORTD             3
 
 
 /****************************************************************************/
 /*PIS ID's.                                                                 */
 /****************************************************************************/
-#define DIO_PIN0     0
-#define DIO_PIN1     1
-#define DIO_PIN2     2
-#define DIO_PIN3     3
-#define DIO_PIN4     4
-#define DIO_PIN5     5
-#define DIO_PIN6     6
-#define DIO_PIN7     7
+#define DIO_PIN0              0
+#define DIO_PIN1              1
+#define DIO_PIN2              2
+#define DIO_PIN3              3
+#define DIO_PIN4              4
+#define DIO_PIN5              5
+#define DIO_PIN6              6
+#define DIO_PIN7              7
 
 
 /****************************************************************************/
 /*PORT OPERATIONS.                                                          */
 /****************************************************************************/
-#define INPTU_PORT    0x00
-#define OUTPUT_PORT   0xFF
+#define INPTU_PORT            0x00
+#define OUTPUT_PORT           0xFF
 
 /****************************************************************************/
 /*PINS OPERATIONS.                                                          */
 /****************************************************************************/
-#define  INPTU_PIN     0
-#define  OUTPUT_PIN    1
+#define  INPTU_PIN            0
+#define  OUTPUT_PIN           1
 
 
 /****************************************************************************/
-/*PIN STATE.                                                          */
+/*PIN STATE.                                                                */
 /****************************************************************************/
-#define DIO_LOW           0
-#define DIO_HIGH          1
+#define DIO_LOW               0
+#define DIO_HIGH              1
 
 /****************************************************************************/
-/*PINS CONNECTION STATE.                                                          */
+/*PINS CONNECTION STATE.                                                    */
 /****************************************************************************/
-#define DIO_FLOAT_PIN       0
-#define DIO_PULL_UP_PIN     1
+#define DIO_FLOAT_PIN         0
+#define DIO_PULL_UP_PIN       1
 
 
 /****************************************************************************/
 /*DEFINE THE MASK BIT.                                                      */
 /****************************************************************************/
 
-#define DIO_MASK_BIT        1
+#define DIO_MASK_BIT         1
 
 /****************************************************************************/
 /* REGISTERS DEFINITION.                                                    */
@@ -80,29 +89,10 @@
 #define PIND  (*(volatile u8 const* const)(0x30))
 
 
-/****************************************************************************/
-/*BASE ADDRESS FOR DIO REGISTERS.                                           */
-/****************************************************************************/
-
-
-/****************************************************************************/
-/* OFFSETS FOR DIO REGISTERS.                                               */
-/****************************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif /* DIO_PRIVATE_H_ */
+
+/***************************** END OF FILE. *********************************/
+/****************************************************************************/
+
