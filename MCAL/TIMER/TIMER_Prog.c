@@ -503,7 +503,7 @@ ISR(VECT_TIMER0_OVF)
 
 			TIMER_pvidAppFunc[TIMER0](TIMER_pvidAppPara[TIMER0]);
 
-			(*((volatile u8* const)0x32)) &=~(1<<0);
+
 			Local_u32Conts = 0 ;
 
 
