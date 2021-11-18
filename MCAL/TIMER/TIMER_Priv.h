@@ -83,4 +83,7 @@
 
 #define NUM_OF_TIMER             3
 
+/**********************************************************************/
+/***************************** PRIVATE FUNCTION ******************/
+void static inline TIMER_vidStaticInline_SetPrescaler( u8 Copy_u8TimerID );
 #endif /* TIMER_PRIV_H_ */

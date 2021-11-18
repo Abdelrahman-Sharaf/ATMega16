@@ -6,29 +6,41 @@
  */
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
-#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\BIT_MATH.h"
+
+
+#include "E:\NTI\AVR\ATmeg16_Drivers\MCAL\GIE\GIE_interface.h"
+
 
 #include "TIMER_Cnfg.h"
 #include "TIMER_interface.h"
 
-#include<util/delay.h>
+#define DDRD (*((volatile u8* const)0x31))
+#define PORTD (*((volatile u8* const)0x32))
+
+
+void tog(void* P)
+{
+	PORTD ^=(1<<0);
+}
 
 int main(void)
 {
 
+
+	DDRD |=(1<<0);
+
+	PORTD |=(1<<0);
+
+	GIE_enuEnable(  );
+
 	TIMER_enuInit(TIMRE_AstrCnfg);
 
-	(*((volatile u8*)0x31)) |=(1<<0);
+	TIMER_enuSetAsyncDelay( TIMER0 ,3000 , tog ,NULL );
 
-
+	PORTD &=~(1<<0);
 
 	while(1)
 	{
-
-		TIMER_enuSetSyncDelay( TIMER0, 1000 );
-
-		(*((volatile u8*)0x32)) ^=(1<<0);
-
 
 	}
 }

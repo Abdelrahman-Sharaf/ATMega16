@@ -1,67 +1,114 @@
-ES_t TIMER_enuSetAsyncDelay( u8 Copy_u8TimerID  ,
-		u32 Copy_u32Time , volatile void (*Copy_pfunApp)(void*) ,
-		volatile void* Copy_pvidParameter )
+ES_t TIMER_enuSetSyncDelay(u8 Copy_u8TimerID , u32 Copy_u32Time)
 {
-
 	ES_t Local_enuErrorState = ES_NOK ;
 
-	if( (Copy_pstrTIMER != NULL) &&  (Copy_pfunApp != NULL) )
+	if( Copy_u8TimerID <= TIMER2 )
 	{
-
-		if( Copy_pstrTIMER == TIMER_ApenuTIMER[TIMER0])
+		if( Copy_u8TimerID == TIMER0 )
 		{
-			TIMER_pvidAppFunc[TIMER0] = Copy_pfunApp         ;
-			TIMER_pvidAppPara[TIMER0] = Copy_pvidParameter   ;
 
-			f32 Local_f32OVFTime = 256 * ((f32)(Copy_pstrTIMER->TIMER_u8Prescaler)/(Copy_pstrTIMER->TIMER_u16Freq_in_khz));
+			/***********************************************************************************************************************************/
+			/* Calculate the time taken by Timer0 to count from 0 to overflow (256).                                                           */
+			/***********************************************************************************************************************************/
+			f32 Local_f32OVFTime = 256 * ((f32)((TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler))/(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Freq_in_khz));
 
+			/*********************************************************************/
+			/* Calculate the number of OVF's that will occur in the desired time.*/
+			/*********************************************************************/
 			f32 Local_u8NumOfOVF = (Copy_u32Time/Local_f32OVFTime);
 
+			/*********************************************************************/
+			/* Fraction number case Handling.                                    */
+			/*********************************************************************/
 			if( (Local_u8NumOfOVF - ((u32)Local_u8NumOfOVF) ) != 0.0)
 			{
+
+				/* Calculate the integer number of overflows.   */
 				u32 Local_u32IntNumOfOVF =(u32)(Local_u8NumOfOVF+1);
 
-				Local_u8NumOfOVF -= (u32)Local_u8NumOfOVF ;
+				/* Get the Fraction number of overflows.*/
+				Local_u8NumOfOVF -= (u32)Local_u8NumOfOVF;
 
-				u8 Local_u8Preload = 256 - (256*Local_u8NumOfOVF);
+				/* Calculate the Preload or the Offset value.  */
+				u8 Local_u8Preload = 256 - ( 256 * Local_u8NumOfOVF );
 
-				TIMER_u32NumOfOVF[TIMER0]=Local_u32IntNumOfOVF;
+				/* Push the preload value in TCNT0 register.*/
+				TCNT0 = Local_u8Preload ;
 
-				TIMER_u8Preload[TIMER0]  =Local_u8Preload ;
+
+
+				//TIMER_enuInit(TIMER_t* Cpy_pstrtTimerCnfg );
+				/*******************************************************************/
+				/* Set the Clock Select Bits according to init. PRESCALER value.   */
+				/*******************************************************************/
+
+				TIMER_vidStaticInline_SetPrescaler(Copy_u8TimerID );
+
+
+				/********************************************************************************************/
+				/* The number of OVF's is integer value, Hence there is no need to calculate preload value. */
+				/********************************************************************************************/
+				while( Local_u32IntNumOfOVF  > 0 )
+				{
+
+					// Stop while the flag is set.
+					while( ((TIFR>>TOV0) & TIMER_MSK_BIT) == 0 );
+
+					// Clear the flag.
+					TIFR |=(TIMER_MSK_BIT<<TOV0);
+
+					//Decrement the number of OVF's.
+					Local_u32IntNumOfOVF-- ;
+
+				}
 
 			}
+
+			/***********************************************************************************************************************************/
+			/* The number of OVF's is integer value, Hence there is no need to calculate preload value.                                        */
+			/***********************************************************************************************************************************/
 			else
 			{
-				TIMER_u32NumOfOVF[TIMER0]=(u32)Local_u8NumOfOVF ;
-			}
+				u32 Local_u32IntNumOfOVF =(u32)(Local_u8NumOfOVF);
 
-			TIMSK |=(TIMER_MSK_BIT<<TOIE0);
+				/*******************************************************************/
+				/* Set the Clock Select Bits according to init. PRESCALER value.   */
+				/*******************************************************************/
+
+
+				TIMER_vidStaticInline_SetPrescaler( Copy_u8TimerID );
+
+
+				/*******************************************************************/
+				/* Count the number of OVF's time to calculate the desired time.   */
+				/*******************************************************************/
+				while( Local_u32IntNumOfOVF > 0 )
+				{
+
+					/* Stuck the code while the flag is not set.     */
+					while(  ((TIFR>>TOV0) & TIMER_MSK_BIT)==0 );
+
+					/* Clear the flag.         */
+					TIFR |=(TIMER_MSK_BIT<<TOV0);
+
+					/* Increment the number of OVF's*/
+					Local_u32IntNumOfOVF-- ;
+
+				}
+
+			}
 
 			Local_enuErrorState = ES_OK ;
 
 		}
-		else if( Copy_pstrTIMER == TIMER_ApenuTIMER[TIMER1])
-		{
-			TIMER_pvidAppFunc[TIMER1] = Copy_pfunApp         ;
-			TIMER_pvidAppPara[TIMER1] = Copy_pvidParameter   ;
-		}
-		else if( Copy_pstrTIMER == TIMER_ApenuTIMER[TIMER2])
-		{
-			TIMER_pvidAppFunc[TIMER2] = Copy_pfunApp         ;
-			TIMER_pvidAppPara[TIMER2] = Copy_pvidParameter   ;
-		}
-		else
-		{
-			//Do Nothing.
-		}
 
+		Local_enuErrorState = ES_OK ;
 	}
 	else
 	{
-		Local_enuErrorState = ES_NULL_POINTER ;
+		Local_enuErrorState = ES_OUT_OF_RANGE;
 	}
 
 
 	return Local_enuErrorState ;
-}// End of TIME0_enuSetAsyncDelay .
-
+}// End of TIME0_enuSetSyncDelay .

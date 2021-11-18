@@ -16,7 +16,7 @@
 
 ES_t TIMER_enuInit(TIMER_t* Cpy_pstrtTimerCnfg );
 
-//ES_t TIMER_enuSetAsyncDelay( TIMER_t* Copy_pstrTIMER , u32 Copy_u32Time , void (*Copy_pfunApp)(void*) , void* Copy_pvidParameter);
+ES_t TIMER_enuSetAsyncDelay( u8 Copy_u8TimerID ,u32 Copy_u32Time ,void (*Copy_pfunApp)(void*) ,void* Copy_pvidParameter );
 
 ES_t TIMER_enuSetSyncDelay(u8 Copy_u8TimerID , u32 Copy_u32Time);
 

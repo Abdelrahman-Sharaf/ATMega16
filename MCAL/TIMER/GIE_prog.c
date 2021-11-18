@@ -8,7 +8,7 @@
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
 
-#include "GIE_priv.h"
+#include "E:\NTI\AVR\ATmeg16_Drivers\MCAL\GIE\GIE_priv.h"
 
 
 ES_t GIE_enuEnable( void )

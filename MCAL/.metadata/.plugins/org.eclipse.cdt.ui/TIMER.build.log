@@ -1,24 +1,19 @@
-20:32:44 **** Incremental Build of configuration Debug for project TIMER ****
+08:41:52 **** Incremental Build of configuration Debug for project TIMER ****
 make all 
-Building file: ../TIMER_Cnfg.c
-Invoking: AVR Compiler
-avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"TIMER_Cnfg.d" -MT"TIMER_Cnfg.o" -c -o "TIMER_Cnfg.o" "../TIMER_Cnfg.c"
-../TIMER_Cnfg.c:30: warning: excess elements in array initializer
-../TIMER_Cnfg.c:30: warning: (near initialization for 'TIMRE_AstrCnfg')
-../TIMER_Cnfg.c:38: warning: excess elements in array initializer
-../TIMER_Cnfg.c:38: warning: (near initialization for 'TIMRE_AstrCnfg')
-Finished building: ../TIMER_Cnfg.c
- 
 Building file: ../TIMER_Prog.c
 Invoking: AVR Compiler
 avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega16 -DF_CPU=1000000UL -MMD -MP -MF"TIMER_Prog.d" -MT"TIMER_Prog.o" -c -o "TIMER_Prog.o" "../TIMER_Prog.c"
+../TIMER_Prog.c: In function 'TIMER_enuSetAsyncDelay':
+../TIMER_Prog.c:201: warning: function return types not compatible due to 'volatile'
+../TIMER_Prog.c:277: warning: function return types not compatible due to 'volatile'
+../TIMER_Prog.c:283: warning: function return types not compatible due to 'volatile'
 ../TIMER_Prog.c: In function '__vector_11':
-../TIMER_Prog.c:414: warning: passing argument 1 of 'TIMER_pvidAppFunc[0]' discards qualifiers from pointer target type
+../TIMER_Prog.c:504: warning: passing argument 1 of 'TIMER_pvidAppFunc[0]' discards qualifiers from pointer target type
 Finished building: ../TIMER_Prog.c
  
 Building target: TIMER.elf
 Invoking: AVR C Linker
-avr-gcc -Wl,-Map,TIMER.map -mmcu=atmega16 -o "TIMER.elf"  ./TIMER_Cnfg.o ./TIMER_Prog.o ./main.o   
+avr-gcc -Wl,-Map,TIMER.map -mmcu=atmega16 -o "TIMER.elf"  ./GIE_prog.o ./TIMER_Cnfg.o ./TIMER_Prog.o ./main.o   
 Finished building target: TIMER.elf
  
 Invoking: AVR Create Extended Listing
@@ -35,7 +30,7 @@ AVR Memory Usage
 ----------------
 Device: atmega16
 
-Program:    5562 bytes (33.9% Full)
+Program:    6198 bytes (37.8% Full)
 (.text + .data + .bootloader)
 
 Data:        299 bytes (29.2% Full)
@@ -45,5 +40,5 @@ Data:        299 bytes (29.2% Full)
 Finished building: sizedummy
  
 
-20:32:55 Build Finished. 0 errors, 5 warnings. (took 10s.787ms)
+08:41:53 Build Finished. 0 errors, 4 warnings. (took 1s.510ms)
 

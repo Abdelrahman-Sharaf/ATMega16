@@ -15,7 +15,6 @@
 /*******************************  INCLUDES  **********************************/
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\STD_TYPES.h"
 #include "E:\NTI\AVR\ATmeg16_Drivers\LIB\errorStates.h"
-#include "E:\NTI\AVR\ATmeg16_Drivers\LIB\BIT_MATH.h"
 
 #include "E:\NTI\AVR\ATmeg16_Drivers\MCAL\interrupt.h"
 
@@ -27,8 +26,8 @@
 /*                 that passed from application layer throw pointer to function and its  */
 /*                 arguments for usage in CallBack.                                      */
 /*****************************************************************************************/
-static volatile void (*TIMER_pvidAppFunc[NUM_OF_TIMER])(void*) = { NULL , NULL , NULL } ;
-static volatile void* TIMER_pvidAppPara[NUM_OF_TIMER]          = { NULL , NULL , NULL } ;
+volatile static void (*TIMER_pvidAppFunc[NUM_OF_TIMER])(void*) = { NULL , NULL , NULL } ;
+volatile static void*  TIMER_pvidAppPara[NUM_OF_TIMER]         = { NULL , NULL , NULL } ;
 
 
 /*****************************************************************************************/
@@ -37,8 +36,9 @@ static volatile void* TIMER_pvidAppPara[NUM_OF_TIMER]          = { NULL , NULL ,
 static TIMER_t* TIMER_ApenuTIMER[NUM_OF_TIMER]={ NULL , NULL , NULL };
 
 
-static u32 TIMER_u32NumOfOVF[NUM_OF_TIMER]= { 0 , 0 , 0 };
-static u8  TIMER_u8Preload[NUM_OF_TIMER]= { 0 , 0 , 0 };
+volatile static u32 TIMER_u32NumOfOVF[NUM_OF_TIMER]= { 0 , 0 , 0 };
+
+volatile static u8  TIMER_u8Preload[NUM_OF_TIMER]= { 0 , 0 , 0 };
 
 
 ES_t TIMER_enuInit(TIMER_t* Cpy_pstrtTimerCnfg )
@@ -181,15 +181,118 @@ ES_t TIMER_enuInit(TIMER_t* Cpy_pstrtTimerCnfg )
 /*==================================================================================================**/
 /*==================================================================================================**/
 /*==================================================================================================**/
-ES_t TIMER_enuSetAsyncDelay( u8 Copy_u8TimerID  ,
-		u32 Copy_u32Time , volatile void (*Copy_pfunApp)(void*) ,
-		volatile void* Copy_pvidParameter )
+ES_t TIMER_enuSetAsyncDelay( u8 Copy_u8TimerID ,u32 Copy_u32Time ,void (*Copy_pfunApp)(void*) ,void* Copy_pvidParameter )
 {
 	ES_t Local_enuErrorState = ES_NOK ;
 
 	if( Copy_u8TimerID <= TIMER2 )
 	{
 
+		// void (*TIMER_pvidAppFunc[NUM_OF_TIMER])(void*) = { NULL , NULL , NULL } ;
+		//void* TIMER_pvidAppPara[NUM_OF_TIMER]          = { NULL , NULL , NULL } ;
+
+		if( Copy_pfunApp != NULL  )
+		{
+			switch(Copy_u8TimerID )
+			{
+			/*=======================================================================*/
+			case TIMER0:
+
+				TIMER_pvidAppFunc[TIMER0] = Copy_pfunApp       ;
+				TIMER_pvidAppPara[TIMER0] = Copy_pvidParameter ;
+
+				/***********************************************************************************************************************************/
+				/* Calculate the time taken by Timer0 to count from 0 to overflow (256).                                                           */
+				/***********************************************************************************************************************************/
+				f32 Local_f32OVFTime = 256 * ((f32)((TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler))/(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Freq_in_khz));
+
+				/*********************************************************************/
+				/* Calculate the number of OVF's that will occur in the desired time.*/
+				/*********************************************************************/
+				f32 Local_u8NumOfOVF = (Copy_u32Time/Local_f32OVFTime);
+
+				/*********************************************************************/
+				/* Fraction number case Handling.                                    */
+				/*********************************************************************/
+				if( (Local_u8NumOfOVF - ((u32)Local_u8NumOfOVF) ) != 0.0)
+				{
+
+					/* Calculate the integer number of overflows.   */
+					u32  Local_u32IntNumOfOVF=(u32)(Local_u8NumOfOVF+1);
+
+					/**/TIMER_u32NumOfOVF[TIMER0] = Local_u32IntNumOfOVF ;
+
+
+
+					/* Get the Fraction number of overflows.*/
+					Local_u8NumOfOVF -= (u32)Local_u8NumOfOVF;
+
+					/* Calculate the Preload or the Offset value.  */
+					u8 Local_u8Preload = 256 - ( 256 * Local_u8NumOfOVF );
+
+					/* Push the preload value in TCNT0 register.*/
+
+					/**/TIMER_u8Preload[TIMER0] = Local_u8Preload ;
+
+
+					TCNT0 = Local_u8Preload ;
+
+
+
+					TIMSK |= ( TIMER_MSK_BIT<<TOIE0 );
+
+					//TIMER_enuInit(TIMER_t* Cpy_pstrtTimerCnfg );
+					/*******************************************************************/
+					/* Set the Clock Select Bits according to init. PRESCALER value.   */
+					/*******************************************************************/
+
+					TIMER_vidStaticInline_SetPrescaler(Copy_u8TimerID );
+
+				}
+				/***********************************************************************************************************************************/
+				/* The number of OVF's is integer value, Hence there is no need to calculate preload value.                                        */
+				/***********************************************************************************************************************************/
+				else
+				{
+					u32 Local_u32IntNumOfOVF =(u32)(Local_u8NumOfOVF);
+
+					/*******************************************************************/
+					/* Set the Clock Select Bits according to init. PRESCALER value.   */
+					/*******************************************************************/
+					TIMER_u32NumOfOVF[TIMER0] = Local_u32IntNumOfOVF ;
+
+
+					TIMSK |= ( TIMER_MSK_BIT<<TOIE0 );
+
+					TIMER_vidStaticInline_SetPrescaler( Copy_u8TimerID );
+
+
+				}
+
+
+				break;
+
+				/*=========================================================================*/
+			case TIMER1:
+				TIMER_pvidAppFunc[TIMER1] = Copy_pfunApp       ;
+				TIMER_pvidAppPara[TIMER1] = Copy_pvidParameter ;
+
+				break;
+
+			case TIMER2:
+				TIMER_pvidAppFunc[TIMER2] = Copy_pfunApp       ;
+				TIMER_pvidAppPara[TIMER2] = Copy_pvidParameter ;
+
+				break;
+
+			}//End of switch().
+
+			Local_enuErrorState = ES_OK;
+		}
+		else
+		{
+			Local_enuErrorState = ES_NULL_POINTER ;
+		}
 	}
 	else
 	{
@@ -221,14 +324,14 @@ ES_t TIMER_enuSetSyncDelay(u8 Copy_u8TimerID , u32 Copy_u32Time)
 			/***********************************************************************************************************************************/
 			f32 Local_f32OVFTime = 256 * ((f32)((TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler))/(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Freq_in_khz));
 
-			/***********************************************************************************************************************************/
-			/* Calculate the number of OVF's that will occur in the desired time.                                                              */
-			/***********************************************************************************************************************************/
+			/*********************************************************************/
+			/* Calculate the number of OVF's that will occur in the desired time.*/
+			/*********************************************************************/
 			f32 Local_u8NumOfOVF = (Copy_u32Time/Local_f32OVFTime);
 
-			/***********************************************************************************************************************************/
-			/* Fraction number case Handling.                                                                                                  */
-			/***********************************************************************************************************************************/
+			/*********************************************************************/
+			/* Fraction number case Handling.                                    */
+			/*********************************************************************/
 			if( (Local_u8NumOfOVF - ((u32)Local_u8NumOfOVF) ) != 0.0)
 			{
 
@@ -246,52 +349,17 @@ ES_t TIMER_enuSetSyncDelay(u8 Copy_u8TimerID , u32 Copy_u32Time)
 
 
 
+				//TIMER_enuInit(TIMER_t* Cpy_pstrtTimerCnfg );
 				/*******************************************************************/
 				/* Set the Clock Select Bits according to init. PRESCALER value.   */
 				/*******************************************************************/
 
-				/* Clear Clock select Bits at the beginning .                                  */
-				TCCR0 &=~(  (TIMER_MSK_BIT<<CS00)|(TIMER_MSK_BIT<<CS01)|(TIMER_MSK_BIT<<CS02)  );
-
-				/* Configure timer to use 1024 prescaler.                   */
-				if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_1024)
-				{
-					TCCR0 |=( (TIMER_MSK_BIT<<CS00)|(TIMER_MSK_BIT<<CS02) );
-				}
-
-				/* Configure timer to use 256 prescaler.                    */
-				else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_256)
-				{
-					TCCR0 |=(TIMER_MSK_BIT<<CS02);
-				}
-
-				/* Configure timer to use 64 prescaler.                      */
-				else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_64)
-				{
-					TCCR0 |=( (TIMER_MSK_BIT<< CS00)|(TIMER_MSK_BIT<< CS01) );
-				}
-
-				/* Configure timer to use 8 prescaler.                       */
-				else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_8)
-				{
-					TCCR0 |=(TIMER_MSK_BIT<< CS01);
-				}
-
-				/* Configure timer to use 1 prescaler (No prescalling) .     */
-				else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_1)
-				{
-					TCCR0 |=(TIMER_MSK_BIT<< CS00);
-				}
-				else
-				{
-					// Do nothing.
-				}
-				// End of prescaler cases handling.
+				TIMER_vidStaticInline_SetPrescaler(Copy_u8TimerID );
 
 
-				/***********************************************************************************************************************************/
-				/* The number of OVF's is integer value, Hence there is no need to calculate preload value.                                        */
-				/***********************************************************************************************************************************/
+				/********************************************************************************************/
+				/* The number of OVF's is integer value, Hence there is no need to calculate preload value. */
+				/********************************************************************************************/
 				while( Local_u32IntNumOfOVF  > 0 )
 				{
 
@@ -319,43 +387,8 @@ ES_t TIMER_enuSetSyncDelay(u8 Copy_u8TimerID , u32 Copy_u32Time)
 				/* Set the Clock Select Bits according to init. PRESCALER value.   */
 				/*******************************************************************/
 
-				/* Clear Clock select Bits at the beginning .                                  */
-				TCCR0 &=~(  (TIMER_MSK_BIT<<CS00)|(TIMER_MSK_BIT<<CS01)|(TIMER_MSK_BIT<<CS02)  );
 
-				/* Configure timer to use 1024 prescaler.                   */
-				if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_1024)
-				{
-					TCCR0 |=( (TIMER_MSK_BIT<<CS00)|(TIMER_MSK_BIT<<CS02) );
-				}
-
-				/* Configure timer to use 256 prescaler.                    */
-				else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_256)
-				{
-					TCCR0 |=(TIMER_MSK_BIT<<CS02);
-				}
-
-				/* Configure timer to use 64 prescaler.                      */
-				else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_64)
-				{
-					TCCR0 |=( (TIMER_MSK_BIT<< CS00)|(TIMER_MSK_BIT<< CS01) );
-				}
-
-				/* Configure timer to use 8 prescaler.                       */
-				else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_8)
-				{
-					TCCR0 |=(TIMER_MSK_BIT<< CS01);
-				}
-
-				/* Configure timer to use 1 prescaler (No prescalling) .     */
-				else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_1)
-				{
-					TCCR0 |=(TIMER_MSK_BIT<< CS00);
-				}
-				else
-				{
-					// Do nothing.
-				}
-				// End of prescaler cases handling.
+				TIMER_vidStaticInline_SetPrescaler( Copy_u8TimerID );
 
 
 				/*******************************************************************/
@@ -395,25 +428,89 @@ ES_t TIMER_enuSetSyncDelay(u8 Copy_u8TimerID , u32 Copy_u32Time)
 
 /*==================================================================================================**/
 /*==================================================================================================**/
+void static inline TIMER_vidStaticInline_SetPrescaler( u8 Copy_u8TimerID )
+{
+
+
+	/*******************************************************************/
+	/* Set the Clock Select Bits according to init. PRESCALER value.   */
+	/*******************************************************************/
+
+	/* Clear Clock select Bits at the beginning .                                  */
+	TCCR0 &=~(  (TIMER_MSK_BIT<<CS00)|(TIMER_MSK_BIT<<CS01)|(TIMER_MSK_BIT<<CS02)  );
+
+	/* Configure timer to use 1024 prescaler.                   */
+	if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_1024)
+	{
+		TCCR0 |=( (TIMER_MSK_BIT<<CS00)|(TIMER_MSK_BIT<<CS02) );
+	}
+
+	/* Configure timer to use 256 prescaler.                    */
+	else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_256)
+	{
+		TCCR0 |=(TIMER_MSK_BIT<<CS02);
+	}
+
+	/* Configure timer to use 64 prescaler.                      */
+	else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_64)
+	{
+		TCCR0 |=( (TIMER_MSK_BIT<< CS00)|(TIMER_MSK_BIT<< CS01) );
+	}
+
+	/* Configure timer to use 8 prescaler.                       */
+	else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_8)
+	{
+		TCCR0 |=(TIMER_MSK_BIT<< CS01);
+	}
+
+	/* Configure timer to use 1 prescaler (No prescalling) .     */
+	else if(TIMER_ApenuTIMER[TIMER0]->TIMER_u16Prescaler == PRES_1)
+	{
+		TCCR0 |=(TIMER_MSK_BIT<< CS00);
+	}
+	else
+	{
+		// Do nothing.
+	}
+	// End of prescaler cases handling.
+
+
+
+
+}
+
+
+
+
+
 /*==================================================================================================**/
 /*==================================================================================================**/
 /*==================================================================================================**/
 /*==================================================================================================**/
 /*  (*TIMER_pvidAppFunc[NUM_OF_TIMER])(void*) =      */
-ISR(VECT_TIMER0_OVF)               /* * TIMER_pvidAppPara[NUM_OF_TIMER]          =      */
-{                                  /*                                                   */
-	if(TIMER_pvidAppFunc[TIMER0] != NULL)
+ISR(VECT_TIMER0_OVF)
+{
+	if( TIMER_pvidAppFunc[TIMER0] != NULL)
 	{
 		static u32 Local_u32Conts = 0 ;
+
 		Local_u32Conts++ ;
 
 		if( Local_u32Conts == TIMER_u32NumOfOVF[TIMER0] )
 		{
+
 			TCNT0 = TIMER_u8Preload[TIMER0] ;
 
-			(*TIMER_pvidAppFunc[TIMER0])(TIMER_pvidAppPara[TIMER0]);
+			TIMER_pvidAppFunc[TIMER0](TIMER_pvidAppPara[TIMER0]);
 
+			(*((volatile u8* const)0x32)) &=~(1<<0);
 			Local_u32Conts = 0 ;
+
+
+		}
+		else
+		{
+
 		}
 
 	}
